@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flag/flag.dart';
@@ -536,18 +537,28 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pushReplacementNamed(context, home, arguments: false);
         }
       } catch (e) {
+
         if (mounted) {
-          MahgozBottomSheet.instance.showBottomSheet(
-              context: context,
-              title: AppLocalizations.of(context)!.errorTitle,
-              message: AppLocalizations.of(context)!.loginError,
-              actionName: AppLocalizations.of(context)!.tryAgain,
-              action: () {
-              });
+          if (e is TimeoutException) {
+            MahgozBottomSheet.instance.showBottomSheet(
+                context: context,
+                title: AppLocalizations.of(context)!.errorTitle,
+                message: e.message ?? "Timeout error",
+                actionName: AppLocalizations.of(context)!.tryAgain,
+                action: () {});
+          }
+          } else {
+            MahgozBottomSheet.instance.showBottomSheet(
+                context: context,
+                title: AppLocalizations.of(context)!.errorTitle,
+                message: AppLocalizations.of(context)!.loginError,
+                actionName: AppLocalizations.of(context)!.tryAgain,
+                action: () {});
+          }
         }
       }
     }
-  }
+
 
   void checkEmptyFields(){
     if (userController.text.isEmpty) {

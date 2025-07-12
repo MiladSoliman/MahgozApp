@@ -117,5 +117,13 @@ class SPUtils {
     return 'لا يوجد';
   }
 
+  bool getIsAdminUser(){
+    User? user = getUserEntity();
+    if (user != null && user.roles != null) {
+      return user.isSuperAdmin ?? false;
+    }
+    return false;
+  }
+
 
 }

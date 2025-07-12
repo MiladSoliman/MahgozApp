@@ -18,11 +18,6 @@ class HomeViewmodel {
       return await _buildingsUseCaseImpl.request();
     }
 
-
-  String?  getWarningMessage(){
-    Future.delayed(Duration(seconds: 10));
-    return "";
-  }
 }
 
 

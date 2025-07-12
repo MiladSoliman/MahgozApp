@@ -10,26 +10,35 @@ import '../models/availableBuildings/avaliable_budilding_entity.dart';
 import '../models/building_entity.dart';
 
 class MahgozApi {
-  final _dio = Dio();
+  final _dio = Dio(BaseOptions(
+    connectTimeout: const Duration(seconds: 10),
+    receiveTimeout: const Duration(seconds: 10),
+  ));
 
   Future<User?> login(String email, String password) async {
     try {
       final response = await _dio.post(
         Api.login,
-        data:{
-          "email":email,
+        data: {
+          "email": email,
           "password": password,
         },
       );
-      if (response.statusCode == 200){
+      if (response.statusCode == 200) {
         return User.fromJson(response.data['data']);
-      }else {
+      } else {
         return null;
       }
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        throw Exception('Login failed: Timeout');
+      }
+      print('Login failed: $e');
+      throw Exception('Login failed: $e');
     } catch (e) {
       print('Login failed: $e');
-      Future.error(e);
-      return null;
+      throw Exception('Login failed: $e');
     }
   }
 

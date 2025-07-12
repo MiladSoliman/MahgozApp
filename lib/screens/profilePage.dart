@@ -50,7 +50,7 @@ class _profilePageState extends State<profilePage> {
               ),
             ),
           )),
-      Positioned(
+/*      Positioned(
           top: 30,
           left: widget.isAr?0:null,
           right: widget.isAr?null:0,
@@ -62,7 +62,7 @@ class _profilePageState extends State<profilePage> {
               });
             },
           )
-      ),
+      ),*/
       menuOpened ? Positioned(
           top: 70,
           left: widget.isAr?0:null,

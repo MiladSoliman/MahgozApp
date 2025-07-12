@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
   ];
   bool isAr = true;
   bool langShown = false;
-  String name = "اسم الخادم";
+  String name = SPUtils().getUserName();
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
@@ -92,20 +92,20 @@ class _HomePageState extends State<HomePage> {
             Container(
               padding: const EdgeInsets.all(20),
               alignment: Alignment.centerRight,
-              child: const Column(
+              child:  Column(
                 children: [
-                  CircleAvatar(
+               const   CircleAvatar(
                     radius: 30.0,
                     backgroundColor: Color(0xFF778899),
                     // backgroundImage:
                     //     NetworkImage("Your Photo Url"), // for Network image
                   ),
-                  SizedBox(
+               const   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    "اسم الخادم",
-                    style: TextStyle(
+                      SPUtils().getUserName(),
+                 style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.black,
                         fontFamily: 'Tajawal'),
@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                           style: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700,
-                              fontSize: 16,
+                              fontSize: 14,
                               decoration: TextDecoration.none,
                               fontFamily: 'Tajawal'),
                         ),
@@ -249,36 +249,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   )
                 : const SizedBox(),
-            // Material(
-            //   color: Colors.white,
-            //   child: InkWell(
-            //     onTap: () {
-            //       Navigator.pushNamed(context, buildings);
-            //     },
-            //     child: Container(
-            //       padding: const EdgeInsets.all(10),
-            //       alignment: Alignment.centerRight,
-            //       child: Row(
-            //         mainAxisAlignment: MainAxisAlignment.end,
-            //         children: [
-            //           Text(
-            //             AppLocalizations.of(context)!.building,
-            //             style: const TextStyle(
-            //                 color: Colors.black,
-            //                 fontWeight: FontWeight.w700,
-            //                 fontSize: 16,
-            //                 decoration: TextDecoration.none,
-            //                 fontFamily: 'Tajawal'),
-            //           ),
-            //           const SizedBox(
-            //             width: 15,
-            //           ),
-            //           const Icon(Icons.blinds)
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // ),
             const Divider(
               thickness: 2,
               color: Color.fromRGBO(237, 228, 228, 1),
@@ -655,16 +625,9 @@ class _homeWidgetState extends State<homeWidget> {
         Consumer <BuildingsProvider>(
          builder:(BuildContext context,buildings,Widget?child) {
            final isLoading = buildings == null || buildings.buildingsList!.isEmpty;
-
-           if (isLoading){
-            const SizedBox(
-               width: 18,
-               height: 18,
-               child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-             );
-           }
-
-
+            if (isLoading) {
+              return _shimmerBuildings();
+            }
            homeController.setBuildingsList(buildings.buildingsList);
            return CarouselSlider(
                options: CarouselOptions(

@@ -73,9 +73,12 @@ class _RequestingOrderHallSecondWidgetState
   Widget build(BuildContext context) {
     return Consumer<AvailableTimesProvider>(
         builder: (context, availableTimesProvider, child) {
-      if (availableTimesProvider.timesList == null) {
-        return const Center(child: CircularProgressIndicator());
-      }
+          if (availableTimesProvider.timesList == null) {
+            // Show loading indicator while data is loading
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
       reservedTimings = availableTimesProvider.timesList!;
       times =
           viewModel.getRemainingAvailableTimings(widget.order.date!,staticTimes, reservedTimings);

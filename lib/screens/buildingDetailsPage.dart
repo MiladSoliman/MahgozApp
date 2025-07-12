@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_broadcasts/flutter_broadcasts.dart';
 import 'package:minamakram/Screens/editBuildingScreen.dart';
+import 'package:minamakram/utils/local_storge.dart';
 import '../constants/Language.dart';
 import '../constants/colors.dart';
 import '../constants/strings.dart';
@@ -62,7 +63,7 @@ class _BuildingDetailsPageState extends State<BuildingDetailsPage> {
       key: _scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        actions: widget.isAdmin?[
+        actions:SPUtils().getIsAdminUser()?[
           IconButton(
               onPressed: (){
                 setState(() {

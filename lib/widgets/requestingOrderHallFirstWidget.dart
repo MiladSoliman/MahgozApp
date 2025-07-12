@@ -9,6 +9,7 @@ import 'package:minamakram/state/buildings_provider.dart';
 import 'package:minamakram/widgets/toast.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import '../constants/Language.dart';
 import '../constants/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -36,14 +37,9 @@ class _RequestingOrderHallFirstWidgetState
 
 
   List<String> activities = ["كورال", "اجتماع صلاة", "مسرح"];
-
- // List<String> buildings = ["مبنى الامير", "مبنى البطل", "مبنى الروماني"];
   List<Buildingg> buildings = [];
 
-  //List<String> floors = ["الدور الاول", "الدور التاني", "الدور التالت"];
  List<Floor> floors = [];
-
-//  List<String> halls = ["قاعة 1", "قاعة 2", "قاعة 3"];
   List<Room> halls = [];
 
   String activity = "";
@@ -55,6 +51,23 @@ class _RequestingOrderHallFirstWidgetState
   Buildingg? selectedBuilding  ;
   Floor? selectedFloor;
   Room? selectedRoom;
+  bool isAr = false;
+
+  @override
+  void initState() {
+    getLocale().then((value) {
+      if (value.languageCode == "ar") {
+        setState(() {
+          isAr = true;
+        });
+      } else {
+        setState(() {
+          isAr = false;
+        });
+      }
+    });
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {
@@ -71,6 +84,12 @@ class _RequestingOrderHallFirstWidgetState
     return Consumer<BuildingsProvider>(
       builder:(context,buildingsList,Widget?child) {
         buildings = buildingsList.buildingsList!;
+        if (buildingsList.buildingsList == null) {
+          // Show loading indicator while data is loading
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
         return Column(
           children: [
             InkWell(
@@ -274,7 +293,7 @@ class _RequestingOrderHallFirstWidgetState
                   child: Row(
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width/2.3,
+                        width: isAr ? MediaQuery.of(context).size.width/2.3 : MediaQuery.of(context).size.width/1.9,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             color: MyColors.simpleBlue,
@@ -375,7 +394,7 @@ class _RequestingOrderHallFirstWidgetState
                   child: Row(
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width/2.3,
+                        width: isAr ? MediaQuery.of(context).size.width/2.3 : MediaQuery.of(context).size.width/2.1,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: MyColors.simpleBlue,

@@ -21,44 +21,7 @@ class _BuildingPageState extends State<BuildingPage> {
 
   @override
   void initState() {
-  /*  myBuildings = [
-      Building(
-          imageUrl: "https://via.placeholder.com/150/92c952",
-          name: "El batal",
-          noOfFloors: 1,
-          noOfHalls: 1,
-          floors: [
-            Floor(floorName: "2", rooms: [
-              Room(
-                name: "ka3a 1",
-                building: "El-batal",
-                capacity: 50,
-                hasAirConditioner: false,
-                hasTv: true,
-                id: 1
-              )
-            ])
-          ]
-      ),
-      Building(
-          imageUrl: "https://via.placeholder.com/150/92c952",
-          name: "El batal",
-          noOfFloors: 15,
-          noOfHalls: 30,
-          floors: [
-            Floor(floorName: "2", rooms: [
-              Room(
-                  name: "ka3a 1",
-                  building: "El-batal",
-                  capacity: 50,
-                  hasAirConditioner: false,
-                  hasTv: true,
-                  id: 1
-              )
-            ])
-          ]
-      ),
-    ];*/
+
     buildingListWidget = GridView.builder(
 
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
