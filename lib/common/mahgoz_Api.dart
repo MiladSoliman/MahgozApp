@@ -136,6 +136,28 @@ class MahgozApi {
     }
   }
 
+  Future<List<ReservedTimeEntity>> getReservationHistory(
+      String userId,
+      ) async {
+    try {
+      final response = await _dio.get(Api.getReservationsHistory,
+        queryParameters: {
+          "userId": userId,
+        },
+      );
+      if (response.statusCode == 200) {
+        final List<dynamic> data = response.data;
+        return data.map((json) => ReservedTimeEntity.fromJson(json)).toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      print("the errror is ${e}");
+      Future.error(e);
+      return Future.error(e);
+    }
+  }
+
 
 
 }

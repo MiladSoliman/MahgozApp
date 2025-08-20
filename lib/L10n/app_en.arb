@@ -16,8 +16,8 @@
  "building":"Buildings",
  "logout":"Log out",
  "book":"Book",
- "accepted":"Accepted",
- "rejected":"Rejected",
+ "accepted":"Previous",
+ "rejected":"Coming",
  "requested":"Requested",
  "delRequest":"Cancel Request",
  "edit":"Edit",
@@ -85,5 +85,8 @@
  "errorTitle":"Error",
  "loginError":"Email or Password incorrect",
  "tryAgain" : "Try Again",
- "errorMessage":"An error occurred. Please try again later"
+ "errorMessage":"An error occurred. Please try again later",
+ "dateValidationMessage": "The date is incorrect. Please choose another date",
+ "chooseBuildingMessage": "Please choose the building first",
+    "chooseFloorMessage": "Please choose the floor first"
 }

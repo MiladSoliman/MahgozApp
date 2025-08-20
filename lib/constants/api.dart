@@ -9,5 +9,6 @@ class Api {
 
   static const String getAvailableDates ="$baseUrl/Reservations/checkRoomAvailability";
 
+  static const String getReservationsHistory ="$baseUrl/Reservations/MyReservation";
 
 }

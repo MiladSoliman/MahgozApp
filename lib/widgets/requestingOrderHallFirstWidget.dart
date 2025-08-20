@@ -6,6 +6,8 @@ import 'package:minamakram/Widgets/requestingOrderHallFirstWidget.dart';
 import 'package:minamakram/models/building_entity.dart';
 import 'package:minamakram/models/order/orderObject.dart';
 import 'package:minamakram/state/buildings_provider.dart';
+import 'package:minamakram/utils/date_converter.dart';
+import 'package:minamakram/utils/toast_utils.dart';
 import 'package:minamakram/widgets/toast.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -383,7 +385,7 @@ class _RequestingOrderHallFirstWidgetState
                     floorBool = !floorBool;
                   });
                 }else{
-                  showToast(context,"من فضلك اختار المبنى الاول");
+               ToastUtils().showToast(context,AppLocalizations.of(context)!.chooseBuildingMessage)
                   ;
                 }
               },
@@ -486,7 +488,7 @@ class _RequestingOrderHallFirstWidgetState
                     hallBool = !hallBool;
                   });
                 }else {
-                showToast(context,"من فضلك اختار الدور الاول");
+               ToastUtils().showToast(context,AppLocalizations.of(context)!.chooseFloorMessage);
                 }
               },
               child: FittedBox(
@@ -611,9 +613,9 @@ class _RequestingOrderHallFirstWidgetState
                 }
                 if (order.date == null || order.date!.isEmpty || order.hallId == null || order.hallId!.isEmpty) dateFilled = false;
 
-                print("the hall is ${order.hallId}");
-
-                if (floorFilled &&
+                if(DateConverter().isDateTodayOrFuture(order.date) == false){
+               ToastUtils().showToast(context, AppLocalizations.of(context)!.dateValidationMessage);
+                } else if (floorFilled &&
                     hallFilled &&
                     buildingFilled &&
                     activityFilled &&
@@ -669,15 +671,7 @@ class _RequestingOrderHallFirstWidgetState
   }
 }
 
-void showToast(BuildContext context,String message) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(message),
-      duration: Duration(seconds: 2),
-      behavior: SnackBarBehavior.floating,
-    ),
-  );
-}
+
 
 
 class ListItem extends StatelessWidget {

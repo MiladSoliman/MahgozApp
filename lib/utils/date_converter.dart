@@ -91,8 +91,6 @@ class DateConverter {
 
     final selectedDate = DateTime.parse(date);
 
-    print("the date is $date , today is $selectedDate");
-
     final filteredReservations = reservations.where((reservation) =>
     DateUtils.isSameDay(reservation.fromDate, selectedDate) ||
         DateUtils.isSameDay(reservation.toDate, selectedDate)
@@ -106,6 +104,20 @@ class DateConverter {
       final amPm = amPmFormat.format(reservation.toDate); // assume toDate carries the period
       return '$from - $to $amPm';
     }).toList();
+  }
+
+  bool isDateTodayOrFuture(String? date) {
+    if (date == null) return false;
+    try {
+      final inputDate = DateTime.parse(date);
+      final now = DateTime.now();
+      return inputDate.year == now.year &&
+          inputDate.month == now.month &&
+          inputDate.day == now.day
+          || inputDate.isAfter(DateTime(now.year, now.month, now.day));
+    } catch (e) {
+      return false;
+    }
   }
 
 }

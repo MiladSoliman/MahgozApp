@@ -266,7 +266,7 @@ class _RequestingOrderHallThirdWidgetState
         builder: (BuildContext context) => AlertDialog(
               content: Container(
                 width: 300,
-                height: 200,
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,

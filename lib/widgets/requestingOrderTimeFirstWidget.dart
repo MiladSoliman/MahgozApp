@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_broadcasts/flutter_broadcasts.dart';
 import 'package:minamakram/Widgets/requestingOrderHallFirstWidget.dart';
 import 'package:minamakram/utils/date_converter.dart';
+import 'package:minamakram/utils/toast_utils.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../constants/colors.dart';
 import '../models/order/orderObject.dart';
@@ -370,7 +371,9 @@ class _RequestingOrderTimeFirstWidgetState extends State<RequestingOrderTimeFirs
 
             if (order.date == null || order.date!.isEmpty) dateFilled = false;
 
-            if (activityFilled &&
+            if(DateConverter().isDateTodayOrFuture(order.date) == false){
+             ToastUtils(). showToast(context, AppLocalizations.of(context)!.dateValidationMessage);
+            } else if (activityFilled &&
                 dateFilled &&
                 timeFilled) {
               sendBroadcast(

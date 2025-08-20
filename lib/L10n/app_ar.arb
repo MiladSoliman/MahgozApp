@@ -16,8 +16,8 @@
    "building":"المباني",
    "logout":"تسجيل الخروج",
    "book":"احجز",
-   "accepted":"المقبولة",
-   "rejected":"المرفوضة",
+   "accepted":"السابقة",
+   "rejected":"القادمة",
    "requested":"تحت الطلب",
    "delRequest":"الغاء الطلب",
    "edit":"تعديل",
@@ -85,5 +85,8 @@
     "errorTitle":"خطأ",
     "loginError":"الايميل او الباسورد غلط",
     "tryAgain" : "حاول تانى",
-    "errorMessage":"حدث خطأ ما. برجاء المحاولة مرة اخرى"
+    "errorMessage":"حدث خطأ ما. برجاء المحاولة مرة اخرى",
+   "dateValidationMessage": "التاريخ غير صحيح. برجاء اختيار تاريخ اخر",
+   "chooseBuildingMessage": "من فضلك اختار الدور الاول",
+    "chooseFloorMessage": "من فضلك اختار الدور"
 }
